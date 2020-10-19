@@ -6,13 +6,24 @@ from django.utils import timezone
 
 User = get_user_model()
 
+class Customer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=250)
+    phone = models.IntegerField()
+    profile_pic = models.ImageField(null=True, blank=True)
+    creation_date = models.DateTimeField(auto_now_add=timezone.now)
+    update_date = models.DateTimeField(auto_now=timezone.now)
+
+    def __str__(self):
+        return f'{self.name} - {self.user.email}'
+
 class Address(models.Model):
     """
     Model to store multiple addresses for a customer/user.
     """
 
     address = models.TextField()
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     creation_date = models.DateTimeField(auto_now_add=timezone.now)
     update_date = models.DateTimeField(auto_now=timezone.now)
 
@@ -78,7 +89,7 @@ class PaymentType(models.Model):
 
 class Order(models.Model):
 
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     order_status = models.ForeignKey(OrderStatus, on_delete=models.DO_NOTHING)
     creation_date = models.DateTimeField(auto_now_add=timezone.now)
@@ -92,7 +103,7 @@ class Order(models.Model):
 
 
 class Cart(models.Model):
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
