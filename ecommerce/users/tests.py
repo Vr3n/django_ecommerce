@@ -16,15 +16,12 @@ class UserManagersTests(TestCase):
 
         try:
 
-            # Username is none for AbstractUser option.
-            # username does not exist for the AbstractBaseUser option
+            #Testing if username and email exist
             self.assertIsNone(user.username)
 
         except AttributeError:
             pass
 
-        with self.assertRaises(TypeError):
-            pass
 
         with self.assertRaises(TypeError):
             User.objects.create_user()
@@ -32,7 +29,7 @@ class UserManagersTests(TestCase):
         with self.assertRaises(TypeError):
             User.objects.create_user(email='')
 
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             User.objects.create_user(email='', password="foo")
 
 
