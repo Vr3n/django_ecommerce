@@ -9,7 +9,7 @@ User = get_user_model()
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
-    phone = models.IntegerField()
+    phone = models.IntegerField(null=True, blank=True)
     profile_pic = models.ImageField(null=True, blank=True)
     creation_date = models.DateTimeField(auto_now_add=timezone.now)
     update_date = models.DateTimeField(auto_now=timezone.now)
