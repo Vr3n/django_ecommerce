@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 
         <!-- Bootstrap -->
-        <link type="text/css" rel="stylesheet" href= "{% static 'css/bootstrap.min.css' %}"/>
+        <link type="text/css" rel="stylesheet" href= "{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"/>
 
         
         <!-- Font Awesome Icon -->
@@ -42,8 +42,11 @@
 
         <!--  Main Layout -->
         <main>
-
-            {% include './image_carousel.html' %}
+            
+            {% block content %}
+                
+            {% endblock content %}
+                
 
         </main>
         <!--  Main Layout -->
@@ -57,7 +60,7 @@
         
         <script src="{% static 'js/popper.min.js' %}"></script>
 
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 
         <script src="{% static 'js/mdb.min.js' %}"></script>
 
@@ -68,8 +71,7 @@
             $(document).ready(function() {
 
                 // SideNav Button Initialization
-                $(".button-collapse").sideNav2();
-
+                $(".button-collapse").sideNav();
                 // SideNav Scrollbar Initialization
                 var sideNavScrollbar = document.querySelector('.custom-scrollbar');
                 var ps = new PerfectScrollbar(sideNavScrollbar);
